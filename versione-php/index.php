@@ -25,7 +25,7 @@
             <div class="container cd_display">
                 <?php include 'disks.php';
                     foreach ($disks as $song) { ?>
-                        <div class="cd" data-genere="<?php $song['genre'] ?>" >
+                        <div class="cd" data-genere="<?php echo $song['genre']?>">
                             <img src="<?php echo $song['poster'] ?>" alt="copertina album <?php echo $song['poster'] ?>">
                             <h2><?php echo $song['title'] ?></h2>
                             <span><?php echo $song['author'] ?></span>
