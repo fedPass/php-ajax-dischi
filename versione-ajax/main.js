@@ -5,29 +5,29 @@ $(document).ready(function(){
         'url':'disks.php',
         'method':'GET',
         'success':function(data){
-            //recupera i dati
-            //data è un array con 10 ogg dentro che rappr i cd
-            console.log(JSON.parse(data));
-            var dischi = JSON.parse(data.response);
+            //recupera i dati (data è un json)
+            // console.log(JSON.parse(data));
+            var disks = JSON.parse(data);
+            console.log(disks);
             // //prendi il template
-            // var source = $("#cd-template").html();
-            // var template = Handlebars.compile(source);
+            var source = $("#cd-template").html();
+            var template = Handlebars.compile(source);
             // //per recuperare i singoli dati faccio un ciclo for sull'array
-            // for (var i = 0; i < dischi.length; i++) {
+            for (var i = 0; i < disks.length; i++) {
             //     //per ogni cd recupero le info
-            //     var context =
-            //         {
-            //             cover: dischi[i].poster,
-            //             album: dischi[i].title,
-            //             singer: dischi[i].author,
-            //             genere: dischi[i].genre,
-            //             exit: dischi[i].year
-            //         };
+                var context =
+                    {
+                        cover: disks[i].poster,
+                        album: disks[i].title,
+                        singer: disks[i].author,
+                        genere: disks[i].genre,
+                        exit: disks[i].year
+                    };
             //     //usa i dati recuperati per compilare template
-            //     var html = template(context);
+                var html = template(context);
             //     //inseriscilo nel container
-            //     $('.container.cd_display').append(html);
-            // }
+                $('.container.cd_display').append(html);
+            }
         },
         'error':function(err){
             alert('errore:' + err.status);
@@ -35,27 +35,27 @@ $(document).ready(function(){
     });
 
     // BONUS: aggiungere una tendina con i generi che permette all'utente di filtrare i dischi (evento change)
-    // $('#genre_choose').change(function(){
+    $('#genre_choose').change(function(){
     //     //recupero il genere selezionato
-    //     var genere_selected = $(this).val();
-    //     console.log(genere_selected);
+        var genere_selected = $(this).val();
+        console.log(genere_selected);
     //     //se non seleziono nulla mostrami tutto
-    //     if(genere_selected == '') {
-    //         $('.cd').fadeIn();
-    //     } else {
-    //         $('.cd').fadeOut();
+        if(genere_selected == '') {
+            $('.cd').fadeIn();
+        } else {
+            $('.cd').fadeOut();
     //         //per ogni cd devo controllare se il genere è uguale
-    //         $('.cd').each(function(){
+            $('.cd').each(function(){
     //             //li cancello tutti
-    //             $(this).fadeOut();
-    //             var genere_album = $(this).attr('data-genere');
+                $(this).fadeOut();
+                var genere_album = $(this).attr('data-genere');
     //             //se è uguale a data-genere lo mostro
-    //             if(genere_selected.toLowerCase() == genere_album.toLowerCase()) {
-    //                 console.log('sono uguali');
-    //                 $(this).fadeIn()
-    //             }
-    //         });
-    //     }
-    // });
+                if(genere_selected.toLowerCase() == genere_album.toLowerCase()) {
+                    console.log('sono uguali');
+                    $(this).fadeIn()
+                }
+            });
+        }
+    });
 
 });
