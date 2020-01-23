@@ -15,24 +15,22 @@
             </div>
         </header>
         <main>
-            <!-- <select id="genre_choose">
+            <select id="genre_choose">
                 <option value="">Scegli genere</option>
                 <option value="pop">Pop</option>
                 <option value="rock">Rock</option>
                 <option value="metal">Metal</option>
                 <option value="jazz">Jazz</option>
-            </select> -->
+            </select>
             <div class="container cd_display">
                 <?php include 'disks.php';
                     foreach ($disks as $song) { ?>
-                        // echo $disks;
-                        <div class="cd">
+                        <div class="cd" data-genere="<?php $song['genre'] ?>" >
                             <img src="<?php echo $song['poster'] ?>" alt="copertina album <?php echo $song['poster'] ?>">
                             <h2><?php echo $song['title'] ?></h2>
                             <span><?php echo $song['author'] ?></span>
                             <span><?php echo $song['year'] ?></span>
                         </div>
-                        ?>
                 <?php } ?>
             </div>
         </main>
