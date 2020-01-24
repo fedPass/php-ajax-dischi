@@ -17,10 +17,6 @@
         <main>
             <select id="genre_choose">
                 <option value="">Scegli genere</option>
-                <option value="pop">Pop</option>
-                <option value="rock">Rock</option>
-                <option value="metal">Metal</option>
-                <option value="jazz">Jazz</option>
             </select>
             <div class="container cd_display">
             </div>

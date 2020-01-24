@@ -13,20 +13,32 @@ $(document).ready(function(){
             var source = $("#cd-template").html();
             var template = Handlebars.compile(source);
             // //per recuperare i singoli dati faccio un ciclo for sull'array
+            //creo un array vuoto in cui mentre creo le card, controllo e pusho i nomi dei generi per poi creare la select
+            var genres = [];
             for (var i = 0; i < disks.length; i++) {
+                var disk = disks[i];
             //     //per ogni cd recupero le info
                 var context =
                     {
-                        cover: disks[i].poster,
-                        album: disks[i].title,
-                        singer: disks[i].author,
-                        genere: disks[i].genre,
-                        exit: disks[i].year
+                        cover: disk.poster,
+                        album: disk.title,
+                        singer: disk.author,
+                        genere: disk.genre,
+                        exit: disk.year
                     };
-            //     //usa i dati recuperati per compilare template
+            //usa i dati recuperati per compilare template
                 var html = template(context);
-            //     //inseriscilo nel container
+            //inseriscilo nel container
                 $('.container.cd_display').append(html);
+                //recupero il genere del disco e se non è già presente dentro genres glielo pusho
+                var genre = disk.genre;
+                if(!genres.includes(genre)) {
+                    genres.push(genre);
+                }
+            }
+            for (var i = 0; i < genres.length; i++) {
+                var genre = genres[i];
+                $('#genre_choose').append('<option value="' + genre + '">' + genre + '</option>')
             }
         },
         'error':function(err){
