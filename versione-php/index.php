@@ -15,33 +15,36 @@
             </div>
         </header>
         <main>
+            <?php include 'disks.php';
+                $genres = [];
+                foreach ($disks as $album) {
+                    $genre_album = $album['genre'];
+                    if(!in_array($genre_album, $genres)) {
+                        $genres[] = $genre_album;
+                    }
+                }
+             ?>
+
             <select id="genre_choose">
                 <option value="">Scegli genere</option>
-                <option value="pop">Pop</option>
-                <option value="rock">Rock</option>
-                <option value="metal">Metal</option>
-                <option value="jazz">Jazz</option>
+                <?php foreach ($genres as $genre) { ?>
+                    <option value="<?php echo $genre ?>"><?php echo $genre ?></option>
+                <?php } ?>
             </select>
+
             <div class="container cd_display">
-                <?php include 'disks.php';
-                    foreach ($disks as $song) { ?>
-                        <div class="cd" data-genere="<?php echo $song['genre']?>">
-                            <img src="<?php echo $song['poster'] ?>" alt="copertina album <?php echo $song['poster'] ?>">
-                            <h2><?php echo $song['title'] ?></h2>
-                            <span><?php echo $song['author'] ?></span>
-                            <span><?php echo $song['year'] ?></span>
-                        </div>
+                <?php foreach ($disks as $album) { ?>
+                    <div class="cd" data-genere="<?php echo $album['genre']?>">
+                        <img src="<?php echo $album['poster'] ?>" alt="copertina album <?php echo $album['title'] ?>">
+                        <h2><?php echo $album['title'] ?></h2>
+                        <span><?php echo $album['author'] ?></span>
+                        <span><?php echo $album['year'] ?></span>
+                    </div>
                 <?php } ?>
             </div>
+
         </main>
-        <!-- <script id="cd-template" type="text/x-handlebars-template">
-            <div class="cd" data-genere="{{genere}}">
-                <img src="{{cover}}" alt="copertina album {{album}}">
-                <h2>{{album}}</h2>
-                <span>{{singer}}</span>
-                <span>{{exit}}</span>
-            </div>
-        </script> -->
+
         <script src="main.js" charset="utf-8"></script>
     </body>
 </html>
