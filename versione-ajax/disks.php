@@ -74,6 +74,28 @@
 
     //in questo modo posso evitare di ricopiare i dati e gestire un solo file centralizzato anche per eventuali modifiche future
     include '../versione-php/disks.php';
-    //impacchetto i dati in un oggetto json
-    echo json_encode($disks);
+
+    //se la get non è vuota
+    if(!empty($_GET) && $_GET['genre'] != '') {
+        //prendo il genere selezionato dall'utente
+        $genre_selected = $_GET['genre'];
+        //creo un arrau vuoto in cui mi pusho i dischi che hanno il genere uguale a quello selezionato dall'utente
+        $match_album = [];
+        //scorri tutti i dischi
+        foreach ($disks as $disk) {
+            //se il genre del disco in esame è uguale al genere selezionato
+            if($disk['genre'] == $genre_selected) {
+                //pushalo nell'array
+                $match_album[] = $disk;
+            }
+        }
+        //impacchetto i dati in un oggetto json
+        echo json_encode($match_album);
+    } else {
+        //la get è vuota visualizza tutti i dischi
+        //impacchetto i dati in un oggetto json
+        echo json_encode($disks);
+    }
+
+
 ?>
